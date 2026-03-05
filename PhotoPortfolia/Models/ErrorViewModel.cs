@@ -1,3 +1,4 @@
+
 namespace PhotoPortfolia.Models
 {
     public class ErrorViewModel
