@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PhotoPortfolia.Models;
+using System.ComponentModel.DataAnnotations;
 
 public class Category
 {

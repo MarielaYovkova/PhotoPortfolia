@@ -1,0 +1,29 @@
+﻿@model PhotoPortfolia.Models.Album
+
+@{
+    ViewData["Title"] = "Delete Album";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h2 class="text-danger">Delete Album</h2>
+            <p class="lead">Are you sure you want to permanently delete this album?</p>
+            <hr />
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.Title</h4>
+                    <p class="text-muted">Category: @Model.Category.Name</p>
+                    <p class="card-text">@Model.Description</p>
+                </div>
+            </div>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger btn-lg px-4">Yes, Delete</button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
