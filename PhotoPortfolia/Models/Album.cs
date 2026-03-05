@@ -1,27 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-public class Album
+﻿namespace PhotoPortfolia.Models
 {
-    [Key]
-    public int Id { get; set; }
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    [Required]
-    [StringLength(100, MinimumLength = 3)]
-    public string Title { get; set; } = null!;
+    public class Album
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [StringLength(500)]
-    public string? Description { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 3)]
+        public string Title { get; set; } = null!;
 
-    [Required]
-    public DateTime CreatedOn { get; set; } = DateTime.Now;
+        [StringLength(500)]
+        public string? Description { get; set; }
 
-    [Required]
-    public int CategoryId { get; set; }
+        [Required]
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
-    [ForeignKey(nameof(CategoryId))]
-    public Category Category { get; set; } = null!;
+        [Required]
+        public int CategoryId { get; set; }
 
-    public ICollection<Photo> Photos { get; set; } = new List<Photo>();
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; } = null!;
+
+        public ICollection<Photo> Photos { get; set; } = new List<Photo>();
+    }
 }
+
+
+
 
