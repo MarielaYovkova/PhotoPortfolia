@@ -1,0 +1,43 @@
+﻿@model PhotoPortfolia.Models.Album
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Albums" asp-action="Index">Portfolio</a></li>
+            <li class="breadcrumb-item active">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <h1 class="display-4">@Model.Title</h1>
+    <p class="lead text-muted">@Model.Description</p>
+    <hr />
+
+    <div class="row">
+        @if (!Model.Photos.Any())
+        {
+            <div class="col-12 text-center py-5">
+                <p class="text-muted">No photos in this album yet. Uploading feature coming soon!</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var photo in Model.Photos)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="photo-container shadow">
+                        <img src="@photo.ImageUrl" class="img-fluid rounded" alt="@photo.Caption">
+                        @if (!string.IsNullOrEmpty(photo.Caption))
+                        {
+                            <div class="photo-caption p-2">@photo.Caption</div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
