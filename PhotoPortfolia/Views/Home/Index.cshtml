@@ -2,7 +2,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section d-flex align-items-center justify-content-center text-white text-center shadow">
+    <div class="overlay"></div>
+    <div class="content z-index-1">
+        <h1 class="display-2 fw-bold mb-3">Capturing Moments</h1>
+        <p class="lead fs-4 mb-4">A journey through my lens. Explore professional photography portfolios.</p>
+        <a asp-controller="Albums" asp-action="Index" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold shadow">
+            View My Portfolio
+        </a>
+    </div>
+</div>
+
+<div class="container my-5 py-5">
+    <div class="row text-center gy-4">
+        <div class="col-md-4">
+            <div class="p-4 border rounded-3 bg-white shadow-sm">
+                <i class="bi bi-camera fs-1 text-dark mb-3"></i>
+                <h3>Nature</h3>
+                <p class="text-muted">Breathtaking landscapes and the raw beauty of the wild.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 border rounded-3 bg-white shadow-sm">
+                <i class="bi bi-person-bounding-box fs-1 text-dark mb-3"></i>
+                <h3>Portraits</h3>
+                <p class="text-muted">Capturing the unique essence and personality of every person.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 border rounded-3 bg-white shadow-sm">
+                <i class="bi bi-heart fs-1 text-dark mb-3"></i>
+                <h3>Weddings</h3>
+                <p class="text-muted">Eternalizing your most special moments and emotions.</p>
+            </div>
+        </div>
+    </div>
 </div>

@@ -63,3 +63,32 @@ h1, h2 {
     color: #222;
     text-transform: uppercase;
 }
+
+/* Hero Section Styling */
+.hero-section {
+    position: relative;
+    height: 80vh; 
+    background: url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?q=80&w=2000') no-repeat center center;
+    background-size: cover;
+    margin-top: -1.5rem; 
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+.hero-section h1 {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css");
