@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhotoPortfolia.Models;
 
@@ -17,12 +18,14 @@ public class AlbumsController : Controller
         return View(albums);
     }
 
+    [Authorize]
     public IActionResult Create()
     {
         ViewBag.Categories = _context.Categories.ToList();
         return View();
     }
 
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Album album)
@@ -37,7 +40,7 @@ public class AlbumsController : Controller
         return View(album);
     }
 
-   
+    [Authorize]
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null) return NotFound();
@@ -49,7 +52,7 @@ public class AlbumsController : Controller
         return View(album);
     }
 
-    
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Album album)
@@ -66,7 +69,7 @@ public class AlbumsController : Controller
         return View(album);
     }
 
-    
+    [Authorize]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null) return NotFound();
@@ -80,7 +83,7 @@ public class AlbumsController : Controller
         return View(album);
     }
 
-    
+    [Authorize]
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)

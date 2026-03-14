@@ -8,9 +8,12 @@
     <h1 class="display-4 text-center">My Photography Portfolio</h1>
     <p class="text-center text-muted">Explore my work through different categories.</p>
 
-    <div class="d-flex justify-content-end mb-4">
-        <a asp-action="Create" class="btn btn-primary shadow-sm">+ Create New Album</a>
-    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="d-flex justify-content-end mb-4">
+            <a asp-action="Create" class="btn btn-primary shadow-sm">+ Create New Album</a>
+        </div>
+    }
 
     <div class="row">
         @foreach (var item in Model)
@@ -23,7 +26,6 @@
                         <p class="card-text flex-grow-1">@item.Description</p>
 
                         <div class="mt-3">
-                            
                             <div class="d-grid mb-2">
                                 <a asp-controller="Photos"
                                    asp-action="AlbumPhotos"
@@ -31,12 +33,15 @@
                                    class="btn btn-dark">View Photos</a>
                             </div>
 
-                            <div class="btn-group w-100">
-                                <a asp-action="Edit" asp-route-id="@item.Id"
-                                   class="btn btn-sm btn-outline-secondary">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id"
-                                   class="btn btn-sm btn-outline-danger">Delete</a>
-                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="btn-group w-100">
+                                    <a asp-action="Edit" asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-outline-secondary">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-outline-danger">Delete</a>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
