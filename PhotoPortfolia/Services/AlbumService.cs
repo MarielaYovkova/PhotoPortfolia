@@ -67,7 +67,30 @@ namespace PhotoPortfolia.Services
                 Categories = categories
             };
         }
+        public async Task EditAlbumAsync(AlbumFormModel model)
+        {
+            var album = await _context.Albums.FindAsync(model.Id);
 
+            if (album != null)
+            {
+                album.Title = model.Title;
+                album.Description = model.Description;
+                album.CategoryId = model.CategoryId;
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteAlbumAsync(int id)
+        {
+            var album = await _context.Albums.FindAsync(id);
+
+            if (album != null)
+            {
+                _context.Albums.Remove(album);
+                await _context.SaveChangesAsync();
+            }
+        }
         public async Task<bool> ExistsAsync(int id) => await _context.Albums.AnyAsync(a => a.Id == id);
     }
 }
