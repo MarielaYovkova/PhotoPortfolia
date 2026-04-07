@@ -10,5 +10,6 @@ namespace PhotoPortfolia.Services
         Task EditAlbumAsync(AlbumFormModel model);
         Task DeleteAlbumAsync(int id);
         Task<bool> ExistsAsync(int id);
+        Task<AlbumDetailsViewModel> GetAlbumDetailsAsync(int albumId);
     }
 }

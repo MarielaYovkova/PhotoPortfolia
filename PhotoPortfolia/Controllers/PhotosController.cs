@@ -1,24 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PhotoPortfolia.Models;
+using PhotoPortfolia.Services;
 
 public class PhotosController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IAlbumService _albumService;
 
-    public PhotosController(ApplicationDbContext context)
+    public PhotosController(IAlbumService albumService)
     {
-        _context = context;
+        _albumService = albumService;
     }
 
     public async Task<IActionResult> AlbumPhotos(int albumId)
     {
-        var album = await _context.Albums
-            .Include(a => a.Photos)
-            .FirstOrDefaultAsync(a => a.Id == albumId);
+        var model = await _albumService.GetAlbumDetailsAsync(albumId);
 
-        if (album == null) return NotFound();
+        if (model == null) return NotFound();
 
-        return View(album);
+        return View(model);
     }
 }

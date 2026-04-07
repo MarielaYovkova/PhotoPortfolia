@@ -91,6 +91,27 @@ namespace PhotoPortfolia.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<AlbumDetailsViewModel> GetAlbumDetailsAsync(int albumId)
+        {
+            var album = await _context.Albums
+                .Include(a => a.Photos)
+                .FirstOrDefaultAsync(a => a.Id == albumId);
+
+            if (album == null) return null!;
+
+            return new AlbumDetailsViewModel
+            {
+                Id = album.Id,
+                Title = album.Title,
+                Description = album.Description,
+                Photos = album.Photos.Select(p => new PhotoViewModel
+                {
+                    ImageUrl = p.ImageUrl,
+                    Caption = p.Caption
+                }).ToList()
+            };
+        }
         public async Task<bool> ExistsAsync(int id) => await _context.Albums.AnyAsync(a => a.Id == id);
     }
 }
