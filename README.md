@@ -20,10 +20,11 @@ Design Patterns: Dependency Injection and MVC
 
 Installation and Setup
 
-To run this project locally, follow these steps:Clone the Repository:Bashgit clone https://github.com/YourUsername/PhotoPortfolia.git
-Configure the Database:Open appsettings.json.Update the DefaultConnection string to point to your local SQL Server instance.
-Apply Migrations:Open the Package Manager Console in Visual Studio.Run the command: Update-Database.
-Run the Application:Press F5 or use the command dotnet run to start the web server.
+To run this project locally, follow these steps:
+-Clone the Repository:Bashgit clone https://github.com/MarielaYovkova/PhotoPortfolia.git
+-Configure the Database:Open appsettings.json.Update the DefaultConnection string to point to your local SQL Server instance.
+-Apply Migrations:Open the Package Manager Console in Visual Studio.Run the command: Update-Database.
+-Run the Application:Press F5 or use the command dotnet run to start the web server.
 
 Environment Variables & Credentials
 
