@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhotoPortfolia.Services;
 
-public class PhotosController : Controller
+namespace PhotoPortfolia.Controllers
 {
-    private readonly IAlbumService _albumService;
-
-    public PhotosController(IAlbumService albumService)
+    public class PhotosController : Controller
     {
-        _albumService = albumService;
-    }
+        private readonly IAlbumService _albumService;
 
-    public async Task<IActionResult> AlbumPhotos(int albumId)
-    {
-        var model = await _albumService.GetAlbumDetailsAsync(albumId);
+        public PhotosController(IAlbumService albumService)
+        {
+            _albumService = albumService;
+        }
 
-        if (model == null) return NotFound();
+        public async Task<IActionResult> AlbumPhotos(int albumId)
+        {
+            var model = await _albumService.GetAlbumDetailsAsync(albumId);
 
-        return View(model);
+            if (model == null) return NotFound();
+
+            return View(model);
+        }
     }
 }
+

@@ -24,7 +24,10 @@
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
 
-        public ICollection<Photo> Photos { get; set; } = new List<Photo>();
+        public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+        public virtual ICollection<Photo> Photos { get; set; } = new HashSet<Photo>();
+
+
     }
 }
 
