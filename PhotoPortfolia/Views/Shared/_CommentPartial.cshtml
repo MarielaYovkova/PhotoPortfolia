@@ -1,5 +1,22 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model int
+@using System.Security.Claims
+
+<div class="mt-4">
+    <h5>Comments</h5>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <form asp-controller="Comments" asp-action="Add" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="albumId" value="@Model" />
+            <div class="mb-2">
+                <textarea name="content" class="form-control" placeholder="Write a comment..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
+        </form>
+    }
+    else
+    {
+        <p><a asp-area="Identity" asp-page="/Account/Login">Log in</a> to leave a comment.</p>
+    }
+</div>
+
