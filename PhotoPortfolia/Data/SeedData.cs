@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-public static class SeedData
+namespace PhotoPortfolia.Data
 {
-    public static async Task SeedRolesAndAdminAsync(IServiceProvider serviceProvider)
+    public static class SeedData
     {
-        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        string[] roleNames = { "Administrator", "User" };
-
-        foreach (var roleName in roleNames)
+        public static async Task SeedRolesAndAdminAsync(IServiceProvider serviceProvider)
         {
-            if (!await roleManager.RoleExistsAsync(roleName))
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            string[] roleNames = { "Administrator", "User" };
+
+            foreach (var roleName in roleNames)
             {
-                await roleManager.CreateAsync(new IdentityRole(roleName));
+                if (!await roleManager.RoleExistsAsync(roleName))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
             }
         }
     }
