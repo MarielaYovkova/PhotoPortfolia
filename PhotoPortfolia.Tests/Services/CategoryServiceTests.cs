@@ -71,5 +71,16 @@ namespace PhotoPortfolia.Tests.Services
             var exists = await _context.Categories.AnyAsync(c => c.Id == category.Id);
             Assert.False(exists);
         }
+
+        [Fact]
+        public async Task EditCategoryAsync_ShouldNotCrash_WhenCategoryDoesNotExist()
+        {
+            // Arrange
+            var nonExistentModel = new CategoryViewModel { Id = 999, Name = "Ghost" };
+
+            // Act&Assert
+            var exception = await Record.ExceptionAsync(() => _service.EditCategoryAsync(nonExistentModel));
+            Assert.Null(exception);
+        }
     }
 }

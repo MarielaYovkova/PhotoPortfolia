@@ -60,6 +60,26 @@ namespace PhotoPortfolia.Tests.Services
             // Assert
             Assert.Null(result);
         }
+
+        [Fact]
+        public async Task GetAllAlbumsAsync_ShouldFilterBySearchString()
+        {
+            // Arrange
+            using var context = new ApplicationDbContext(_options);
+            context.Albums.AddRange(new List<Album>
+    {
+        new Album { Id = 10, Title = "Summer Vibes", Description = "..." },
+        new Album { Id = 11, Title = "Winter Wonderland", Description = "..." }
+    });
+            await context.SaveChangesAsync();
+            var service = new AlbumService(context);
+
+            // Act
+            var result = await service.GetAllAlbumsAsync();
+
+            // Assert
+            Assert.Contains(result, a => a.Title.Contains("Summer"));
+        }
     }
 }
 

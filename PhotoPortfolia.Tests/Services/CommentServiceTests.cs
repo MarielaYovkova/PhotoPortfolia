@@ -47,5 +47,23 @@ namespace PhotoPortfolia.Tests.Services
             var exists = await context.Comments.AnyAsync(c => c.Id == 10);
             Assert.True(exists);
         }
+
+        [Fact]
+        public async Task DeleteCommentAsync_ShouldDelete_WhenUserIsAdmin()
+        {
+            // Arrange
+            using var context = new ApplicationDbContext(_options);
+            var comment = new Comment { Id = 5, Content = "To be deleted by Admin", AuthorId = "UserA", AlbumId = 1 };
+            context.Comments.Add(comment);
+            await context.SaveChangesAsync();
+            var service = new CommentService(context);
+
+            // Act
+            await service.DeleteCommentAsync(5, "Admin123", true);
+
+            // Assert
+            var exists = await context.Comments.AnyAsync(c => c.Id == 5);
+            Assert.False(exists);
+        }
     }
 }
