@@ -66,19 +66,25 @@ namespace PhotoPortfolia.Tests.Services
         {
             // Arrange
             using var context = new ApplicationDbContext(_options);
+
+            var category = new Category { Id = 1, Name = "TestCategory" };
+            context.Categories.Add(category);
+
             context.Albums.AddRange(new List<Album>
-    {
-        new Album { Id = 10, Title = "Summer Vibes", Description = "..." },
-        new Album { Id = 11, Title = "Winter Wonderland", Description = "..." }
-    });
+            {
+                 new Album { Id = 10, Title = "Summer Vibes", Description = "Test", CategoryId = 1 },
+                 new Album { Id = 11, Title = "Winter Wonderland", Description = "Test", CategoryId = 1 }
+            });
             await context.SaveChangesAsync();
+
             var service = new AlbumService(context);
 
             // Act
-            var result = await service.GetAllAlbumsAsync();
+            var result = await service.GetAllAlbumsAsync("Summer");
 
             // Assert
-            Assert.Contains(result, a => a.Title.Contains("Summer"));
+            Assert.Single(result);
+            Assert.Equal("Summer Vibes", result.First().Title);
         }
     }
 }

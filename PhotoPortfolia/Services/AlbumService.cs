@@ -16,15 +16,23 @@ namespace PhotoPortfolia.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<AlbumInfoViewModel>> GetAllAlbumsAsync()
+        public async Task<IEnumerable<AlbumInfoViewModel>> GetAllAlbumsAsync(string? searchString = null)
         {
-            return await _context.Albums
+            var query = _context.Albums.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                query = query.Where(a => a.Title.Contains(searchString)
+                                      || a.Description.Contains(searchString));
+            }
+
+            return await query
                 .Select(a => new AlbumInfoViewModel
                 {
                     Id = a.Id,
                     Title = a.Title,
                     Description = a.Description,
-                    CategoryName = a.Category.Name,
+                    CategoryName = a.Category != null ? a.Category.Name : "No Category",
                     PhotosCount = a.Photos.Count
                 })
                 .ToListAsync();

@@ -4,7 +4,7 @@ namespace PhotoPortfolia.Services
 {
     public interface IAlbumService
     {
-        Task<IEnumerable<AlbumInfoViewModel>> GetAllAlbumsAsync();
+        Task<IEnumerable<AlbumInfoViewModel>> GetAllAlbumsAsync(string? searchString = null);
         Task<AlbumFormModel> GetAlbumFormModelAsync(int? id = null);
         Task CreateAlbumAsync(AlbumFormModel model);
         Task EditAlbumAsync(AlbumFormModel model);
