@@ -28,5 +28,16 @@ namespace PhotoPortfolia.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Route("Home/Error/{statusCode}")]
+        public IActionResult Error(int statusCode)
+        {
+            if (statusCode == 404)
+            {
+                return View("NotFound");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.CurrentDirectory });
+        }
     }
 }
