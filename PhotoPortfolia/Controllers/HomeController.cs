@@ -37,7 +37,7 @@ namespace PhotoPortfolia.Controllers
                 return View("NotFound");
             }
 
-            return View(new ErrorViewModel { RequestId = Activity.CurrentDirectory });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
