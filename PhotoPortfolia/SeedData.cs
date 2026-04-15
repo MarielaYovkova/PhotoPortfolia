@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PhotoPortfolia.Data
 {
-    public static class SeedData
+    public static class RoleSeedData
     {
         public static async Task SeedRolesAndAdminAsync(IServiceProvider serviceProvider)
         {
