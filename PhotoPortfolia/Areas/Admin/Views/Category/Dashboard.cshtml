@@ -36,7 +36,9 @@
                 <div class="col-md-6">
                     <div class="p-4 bg-white border rounded shadow-sm text-center">
                         <h5 class="mb-4">Albums per Category</h5>
-                        <canvas id="categoryChart" width="400" height="400"></canvas>
+                        <div style="position: relative; height:300px; width:100%">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,7 +63,12 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
             }
         });
     };
