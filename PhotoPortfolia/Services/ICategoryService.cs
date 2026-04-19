@@ -9,5 +9,6 @@ namespace PhotoPortfolia.Services
         Task<CategoryViewModel?> GetByIdAsync(int id);
         Task EditCategoryAsync(CategoryViewModel model);
         Task DeleteCategoryAsync(int id);
+        Task<AdminDashboardViewModel> GetDashboardStatsAsync();
     }
 }

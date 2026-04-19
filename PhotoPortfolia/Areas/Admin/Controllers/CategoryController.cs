@@ -77,5 +77,11 @@ namespace PhotoPortfolia.Areas.Admin.Controllers
             await _categoryService.DeleteCategoryAsync(id);
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Dashboard()
+        {
+            var stats = await _categoryService.GetDashboardStatsAsync();
+            return View(stats);
+        }
+
     }
 }

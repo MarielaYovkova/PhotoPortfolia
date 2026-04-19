@@ -55,6 +55,21 @@ namespace PhotoPortfolia.Services
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<AdminDashboardViewModel> GetDashboardStatsAsync()
+        {
+            return new AdminDashboardViewModel
+            {
+                TotalAlbums = await _context.Albums.CountAsync(),
+                TotalPhotos = await _context.Photos.CountAsync(),
+                TotalComments = await _context.Comments.CountAsync(),
+                CategoryStats = await _context.Categories
+                    .Select(c => new CategoryStatViewModel
+                    {
+                        CategoryName = c.Name,
+                        AlbumCount = c.Albums.Count
+                    }).ToListAsync()
+            };
+        }
     }
 }
 
