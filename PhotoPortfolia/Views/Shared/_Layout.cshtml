@@ -31,15 +31,7 @@
                         @if (User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Manage Categories</a>
-                            </li>
-                        }
-                        @if (User.IsInRole("Administrator"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark fw-bold" asp-area="Admin" asp-controller="Category" asp-action="Dashboard">
-                                    📊 Dashboard
-                                </a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Dashboard">Dashboard</a>
                             </li>
                         }
                     </ul>

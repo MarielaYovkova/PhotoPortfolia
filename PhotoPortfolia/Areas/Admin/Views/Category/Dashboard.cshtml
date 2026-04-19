@@ -1,61 +1,68 @@
-﻿@model AdminDashboardViewModel
+﻿@model PhotoPortfolia.ViewModels.AdminDashboardViewModel
+@{
+    Layout = "_Layout";
+}
 
-<div class="container mt-4">
-    <h2 class="mb-4">Admin Dashboard</h2>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card bg-primary text-white shadow">
-                <div class="card-body">
-                    <h5>Total Albums</h5>
-                    <h3>@Model.TotalAlbums</h3>
+<div class="container mt-5">
+    <div class="card shadow border-0">
+        <div class="card-header bg-dark text-white p-3">
+            <h2 class="m-0 h4">📊 Administrative Dashboard</h2>
+        </div>
+        <div class="card-body bg-light">
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="p-3 bg-white border rounded text-center shadow-sm">
+                        <h6 class="text-muted">Total Albums</h6>
+                        <h3 class="display-6 fw-bold text-primary">@Model.TotalAlbums</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 bg-white border rounded text-center shadow-sm">
+                        <h6 class="text-muted">Total Photos</h6>
+                        <h3 class="display-6 fw-bold text-success">@Model.TotalPhotos</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 bg-white border rounded text-center shadow-sm">
+                        <h6 class="text-muted">Comments</h6>
+                        <h3 class="display-6 fw-bold text-info">@Model.TotalComments</h3>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card bg-success text-white shadow">
-                <div class="card-body">
-                    <h5>Total Photos</h5>
-                    <h3>@Model.TotalPhotos</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card bg-info text-white shadow">
-                <div class="card-body">
-                    <h5>Comments</h5>
-                    <h3>@Model.TotalComments</h3>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div class="card shadow">
-                <div class="card-header bg-dark text-white text-center">Albums per Category</div>
-                <div class="card-body">
-                    <canvas id="categoryChart"></canvas>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="p-4 bg-white border rounded shadow-sm text-center">
+                        <h5 class="mb-4">Albums per Category</h5>
+                        <canvas id="categoryChart" width="400" height="400"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('categoryChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    window.onload = function() {
+        var ctx = document.getElementById('categoryChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
             data: {
                 labels: @Html.Raw(Json.Serialize(Model.CategoryStats.Select(s => s.CategoryName))),
                 datasets: [{
                     data: @Html.Raw(Json.Serialize(Model.CategoryStats.Select(s => s.AlbumCount))),
-                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1']
+                    backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#dc3545', '#6610f2', '#0dcaf0'],
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
             }
         });
-    </script>
-}
-
+    };
+</script>
