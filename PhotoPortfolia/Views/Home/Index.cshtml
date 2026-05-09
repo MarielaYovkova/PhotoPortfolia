@@ -1,40 +1,87 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<PhotoPortfolia.ViewModels.AlbumViewModel>
+
+@{
+	ViewData["Title"] = "Home Page";
 }
 
-<div class="hero-section d-flex align-items-center justify-content-center text-white text-center shadow">
-    <div class="overlay"></div>
-    <div class="content z-index-1">
-        <h1 class="display-2 fw-bold mb-3 hero-title-outlined">Capturing Moments</h1>
-        <p class="lead fs-4 mb-4">A journey through my lens. Explore professional photography portfolios.</p>
-        <a asp-controller="Albums" asp-action="Index" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold shadow">
-            View My Portfolio
-        </a>
-    </div>
+<div class="bg-dark text-white py-5 mb-5 shadow">
+	<div class="container text-center py-5">
+		<h1 class="display-3 fw-bold">Capture the Moment</h1>
+		<p class="lead">A professional photography portfolio showcasing the beauty of the world.</p>
+		<a asp-controller="Albums" asp-action="Index" class="btn btn-primary btn-lg px-4 me-md-2">View Full Portfolio</a>
+	</div>
 </div>
 
-<div class="container my-5 py-5">
-    <div class="row text-center gy-4">
-        <div class="col-md-4">
-            <div class="p-4 border rounded-3 bg-white shadow-sm">
-                <i class="bi bi-camera fs-1 text-dark mb-3"></i>
-                <h3>Nature</h3>
-                <p class="text-muted">Breathtaking landscapes and the raw beauty of the wild.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-4 border rounded-3 bg-white shadow-sm">
-                <i class="bi bi-person-bounding-box fs-1 text-dark mb-3"></i>
-                <h3>Portraits</h3>
-                <p class="text-muted">Capturing the unique essence and personality of every person.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-4 border rounded-3 bg-white shadow-sm">
-                <i class="bi bi-heart fs-1 text-dark mb-3"></i>
-                <h3>Weddings</h3>
-                <p class="text-muted">Eternalizing your most special moments and emotions.</p>
-            </div>
-        </div>
-    </div>
+<div class="container">
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<h2 class="fw-bold">Latest Albums</h2>
+		<span class="text-muted">Explore our most recent work</span>
+	</div>
+
+	<div class="row">
+		@if (!Model.Any())
+		{
+			<div class="col-12 text-center py-5">
+				<p class="text-muted italic">The portfolio is being updated. Check back soon!</p>
+			</div>
+		}
+		else
+		{
+			@foreach (var album in Model)
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card h-100 border-0 shadow-sm album-card">
+						<div class="card-body d-flex flex-column">
+							<h5 class="card-title fw-bold">@album.Title</h5>
+							<p class="card-text text-muted small flex-grow-1">
+								@(album.Description?.Length > 100 ? album.Description.Substring(0, 97) + "..." : album.Description)
+							</p>
+							<div class="mt-3">
+								<a asp-controller="Photos" asp-action="AlbumPhotos" asp-route-albumId="@album.Id"
+								   class="btn btn-outline-primary btn-sm w-100">View Album</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		}
+	</div>
+
+	<hr class="my-5" />
+
+	<div class="row py-4 text-center">
+		<div class="col-md-4">
+			<i class="fas fa-camera fa-2x text-primary mb-3"></i>
+			<h5>High Quality</h5>
+			<p class="small text-muted">Professional equipment and post-processing.</p>
+		</div>
+		<div class="col-md-4">
+			<i class="fas fa-paints-brush fa-2x text-primary mb-3"></i>
+			<h5>Creative Vision</h5>
+			<p class="small text-muted">Unique perspective in every single shot.</p>
+		</div>
+		<div class="col-md-4">
+			<i class="fas fa-heart fa-2x text-primary mb-3"></i>
+			<h5>Passion</h5>
+			<p class="small text-muted">We love what we do and it shows in our work.</p>
+		</div>
+	</div>
 </div>
+
+<style>
+	.album-card {
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		border-radius: 15px;
+		overflow: hidden;
+	}
+
+		.album-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+		}
+
+	.bg-dark {
+		background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?q=80&w=2000') no-repeat center center;
+		background-size: cover;
+	}
+</style>

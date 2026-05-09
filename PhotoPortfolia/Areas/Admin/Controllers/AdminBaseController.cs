@@ -5,7 +5,23 @@ namespace PhotoPortfolia.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Administrator")]
-    public class AdminBaseController : Controller
+    public abstract class AdminBaseController : Controller
     {
+
+        protected void SuccessMessage(string message)
+        {
+            TempData["SuccessMessage"] = message;
+        }
+
+        protected void ErrorMessage(string message)
+        {
+            TempData["ErrorMessage"] = message;
+        }
+
+
+        protected string FormatAdminTitle(string action)
+        {
+            return $"Admin Panel - {action}";
+        }
     }
 }
